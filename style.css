@@ -1,3 +1,7 @@
+:root {
+  --button-answer-bg: rgb(239, 242, 244);
+}
+
 body {
   font-family: "Roboto", sans-serif;
   min-height: 100vh;
@@ -61,4 +65,71 @@ body {
 
 .hide {
   display: none;
+}
+
+.questions__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.questions {
+}
+.questions__text {
+  color: rgb(50, 50, 119);
+  font-weight: bold;
+  padding: 10px;
+}
+.answer__options {
+}
+.button__answer {
+  background-color: var(--button-answer-bg);
+  color: rgb(50, 50, 119);
+  font-weight: bold;
+  border: 1px solid rgb(50, 50, 119);
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 10px;
+}
+.false {
+  --button-answer-bg: rgb(230, 193, 193);
+}
+
+.true {
+  --button-answer-bg: rgb(151, 218, 168);
+}
+
+.horizontal__line {
+  background-color: rgb(222, 216, 216);
+  height: 1px;
+  width: 100%;
+  margin: 10px;
+}
+.check__answers {
+  display: flex;
+  justify-content: center;
+}
+.check__answers__button {
+  font-size: 14px;
+  color: white;
+  background-color: rgb(117, 117, 126);
+  padding: 10px 50px;
+  border-radius: 10px;
+}
+.response__counter {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  gap: 20px;
+}
+.response__counter__text {
+  padding: 10px;
+  font-weight: bold;
+  color: rgb(50, 50, 119);
+}
+.reset__button {
+  font-size: 14px;
+  color: white;
+  background-color: rgb(50, 50, 119);
+  padding: 10px 50px;
+  border-radius: 10px;
 }
