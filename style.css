@@ -63,23 +63,21 @@ body {
   border-radius: 15px;
 }
 
-.hide {
-  display: none;
-}
-
 .questions__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.questions {
-}
+
 .questions__text {
   color: rgb(50, 50, 119);
   font-weight: bold;
   padding: 10px;
 }
 .answer__options {
+  width: 600px;
+  display: flex;
+  justify-content: flex-start;
 }
 .button__answer {
   background-color: var(--button-answer-bg);
@@ -98,6 +96,11 @@ body {
   --button-answer-bg: rgb(151, 218, 168);
 }
 
+.select {
+  --button-answer-bg: rgb(50, 50, 119);
+  color: white;
+}
+
 .horizontal__line {
   background-color: rgb(222, 216, 216);
   height: 1px;
@@ -111,9 +114,12 @@ body {
 .check__answers__button {
   font-size: 14px;
   color: white;
-  background-color: rgb(117, 117, 126);
+  background-color: rgb(50, 50, 119);
   padding: 10px 50px;
   border-radius: 10px;
+}
+.check__answers__button:disabled {
+  background-color: rgb(117, 117, 126);
 }
 .response__counter {
   display: flex;
@@ -132,4 +138,7 @@ body {
   background-color: rgb(50, 50, 119);
   padding: 10px 50px;
   border-radius: 10px;
+}
+.hide {
+  display: none;
 }

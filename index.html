@@ -14,16 +14,16 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="start hide">
+    <div class="start">
       <h1 class="start__title">Quizzical</h1>
       <div class="start__body">
         <div class="start__row">
           <p class="start__text">Number of question</p>
-          <input class="start__input" type="number" />
+          <input class="start__input" type="number" value="5" />
         </div>
         <div class="start__row">
           <p class="start__text">Select Difficulty</p>
-          <select class="start__select">
+          <select class="start__select difficulty__select">
             <option value="any">Any Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
@@ -33,7 +33,7 @@
 
         <div class="start__row">
           <p class="start__text">Select Type</p>
-          <select class="start__select">
+          <select class="start__select type__select">
             <option value="any">Any Type</option>
             <option value="multiple">Multiple Choice</option>
             <option value="boolean">True / False</option>
@@ -42,7 +42,7 @@
 
         <div class="start__row">
           <p class="start__text">Select Category</p>
-          <select class="start__select">
+          <select class="start__select category__select">
             <option value="any">Any Category</option>
             <option value="9">General Knowledge</option>
             <option value="10">Entertainment: Books</option>
@@ -76,70 +76,27 @@
       <button class="start__button">Start</button>
     </div>
 
-    <div class="questions__container">
-      <div class="questions">
-        <p class="questions__text">Вопрос</p>
-      </div>
-      <div class="answer__options">
-        <button class="button__answer false">C++</button>
-        <button class="button__answer true">JavaScript</button>
-        <button class="button__answer false">Binary</button>
-        <button class="button__answer">Python</button>
-      </div>
-      <hr class="horizontal__line" />
+    <div class="questions__container hide">
+      <div class="questions__body">
+        <template class="questions__template">
+          <div class="questions__item">
+            <p class="questions__text">Вопрос</p>
 
-      <div class="questions">
-        <p class="questions__text">Вопрос</p>
+            <div class="answer__options">
+              <button class="button__answer">C++</button>
+              <button class="button__answer">JavaScript</button>
+              <button class="button__answer">Binary</button>
+              <button class="button__answer">Python</button>
+            </div>
+            <hr class="horizontal__line" />
+          </div>
+        </template>
       </div>
-      <div class="answer__options">
-        <button class="button__answer true">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis,
-          reprehenderit!
-        </button>
-        <button class="button__answer">2</button>
-        <button class="button__answer">3</button>
-        <button class="button__answer">4</button>
-      </div>
-      <hr class="horizontal__line" />
-
-      <div class="questions">
-        <p class="questions__text">Вопрос</p>
-      </div>
-      <div class="answer__options">
-        <button class="button__answer">1</button>
-        <button class="button__answer">2</button>
-        <button class="button__answer">3</button>
-        <button class="button__answer">4</button>
-      </div>
-      <hr class="horizontal__line" />
-
-      <div class="questions">
-        <p class="questions__text">Вопрос</p>
-      </div>
-      <div class="answer__options">
-        <button class="button__answer">1</button>
-        <button class="button__answer">2</button>
-        <button class="button__answer">3</button>
-        <button class="button__answer">4</button>
-      </div>
-      <hr class="horizontal__line" />
-
-      <div class="questions">
-        <p class="questions__text">Вопрос</p>
-      </div>
-      <div class="answer__options">
-        <button class="button__answer">1</button>
-        <button class="button__answer">2</button>
-        <button class="button__answer">3</button>
-        <button class="button__answer">4</button>
-      </div>
-      <hr class="horizontal__line" />
-
       <div class="check__answers">
-        <button class="check__answers__button">Check answers</button>
+        <button class="check__answers__button" disabled>Check answers</button>
       </div>
 
-      <div class="response__counter">
+      <div class="response__counter hide">
         <p class="response__counter__text">Счетчик ответов</p>
         <button class="reset__button">Play again</button>
       </div>
