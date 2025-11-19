@@ -11,6 +11,7 @@ const checkAnswersButton = document.querySelector(".check__answers__button");
 const checkAnswers = document.querySelector(".check__answers");
 const responseCounter = document.querySelector(".response__counter");
 const result = document.querySelector(".result");
+const resetButton = document.querySelector(".reset__button");
 let quizEnd = false;
 
 startButton.addEventListener("click", () => {
@@ -38,8 +39,11 @@ startButton.addEventListener("click", () => {
     })
     .then((data) => {
       console.log(data.results);
-      const questions = data.results.map((el) => {
-        el.answers = el.incorrect_answers.concat(el.correct_answer);
+      let questions = data.results.map((el) => {
+        el.answers = el.incorrect_answers
+          .concat(el.correct_answer)
+          .sort(() => Math.random() - 0.5);
+
         return el;
       });
 
@@ -66,6 +70,10 @@ function renderQuestions(questions) {
     const answerOptions = clone.querySelector(".answer__options");
     question.answers.forEach((answer) => {
       const button = document.createElement("button");
+
+      button.classList.remove("true");
+      button.classList.remove("select");
+      button.classList.remove("false");
       button.classList.add("button__answer");
       if (question.selected_answer === answer && !quizEnd) {
         button.classList.add("select");
@@ -98,6 +106,12 @@ function renderQuestions(questions) {
       checkAnswers.classList.add("hide");
       responseCounter.classList.remove("hide");
       result.innerHTML = `${correctCount} / ${questions.length}`;
+    });
+    resetButton.addEventListener("click", () => {
+      questionsContainer.classList.add("hide");
+      checkAnswersButton.setAttribute("disabled", "");
+      start.classList.remove("hide");
+      questions = [];
     });
   }
 }
