@@ -7,6 +7,11 @@ const startButton = document.querySelector(".start__button");
 const questionsContainer = document.querySelector(".questions__container");
 const questionsBody = document.querySelector(".questions__body");
 const questionsTemplate = document.querySelector(".questions__template");
+const checkAnswersButton = document.querySelector(".check__answers__button");
+const checkAnswers = document.querySelector(".check__answers");
+const responseCounter = document.querySelector(".response__counter");
+const result = document.querySelector(".result");
+let quizEnd = false;
 
 startButton.addEventListener("click", () => {
   const number = numberInput.value;
@@ -33,14 +38,66 @@ startButton.addEventListener("click", () => {
     })
     .then((data) => {
       console.log(data.results);
+      const questions = data.results.map((el) => {
+        el.answers = el.incorrect_answers.concat(el.correct_answer);
+        return el;
+      });
+
       start.classList.add("hide");
       questionsContainer.classList.remove("hide");
-      data.results.forEach((question) => {
-        const clone = questionsTemplate.content.cloneNode(true);
-        const questionsText = clone.querySelector(".questions__text");
-        questionsText.innerHTML = question.question;
-        const answerOptions = clone.querySelector(".answer__options");
-        answerOptions.questionsBody.append(clone);
-      });
+      renderQuestions(questions);
     });
 });
+
+function renderQuestions(questions) {
+  questionsBody.innerHTML = null;
+  let isAllSelected = true;
+  let correctCount = 0;
+  questions.forEach((question) => {
+    if (!question.selected_answer) {
+      isAllSelected = false;
+    }
+    if (question.selected_answer === question.correct_answer) {
+      correctCount++;
+    }
+    const clone = questionsTemplate.content.cloneNode(true);
+    const questionsText = clone.querySelector(".questions__text");
+    questionsText.innerHTML = question.question;
+    const answerOptions = clone.querySelector(".answer__options");
+    question.answers.forEach((answer) => {
+      const button = document.createElement("button");
+      button.classList.add("button__answer");
+      if (question.selected_answer === answer && !quizEnd) {
+        button.classList.add("select");
+      } else if (question.correct_answer === answer && quizEnd) {
+        button.classList.add("true");
+      } else if (
+        question.selected_answer === answer &&
+        answer !== question.correct_answer &&
+        quizEnd
+      ) {
+        button.classList.add("false");
+      }
+
+      button.innerHTML = answer;
+      if (!quizEnd) {
+        button.addEventListener("click", () => {
+          question.selected_answer = answer;
+          renderQuestions(questions);
+        });
+      }
+      answerOptions.append(button);
+    });
+    questionsBody.append(clone);
+  });
+  if (isAllSelected) {
+    checkAnswersButton.removeAttribute("disabled");
+    checkAnswersButton.addEventListener("click", () => {
+      quizEnd = true;
+      renderQuestions(questions);
+      checkAnswers.classList.add("hide");
+      responseCounter.classList.remove("hide");
+      result.innerHTML = `${correctCount} / ${questions.length}`;
+    });
+  }
+}
