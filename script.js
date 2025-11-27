@@ -107,11 +107,13 @@ function renderQuestions(questions) {
       responseCounter.classList.remove("hide");
       result.innerHTML = `${correctCount} / ${questions.length}`;
     });
-    resetButton.addEventListener("click", () => {
-      questionsContainer.classList.add("hide");
-      checkAnswersButton.setAttribute("disabled", "");
-      start.classList.remove("hide");
-      questions = [];
-    });
   }
 }
+resetButton.addEventListener("click", () => {
+  questionsContainer.classList.add("hide");
+  checkAnswersButton.setAttribute("disabled", true);
+  start.classList.remove("hide");
+  quizEnd = false;
+  responseCounter.classList.add("hide");
+  checkAnswers.classList.remove("hide");
+});
